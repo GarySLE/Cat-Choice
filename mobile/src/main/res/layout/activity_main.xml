@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ys.zy.catchoice.viewModel.MainViewModel" />
+
+        <variable
+            name="viewModel"
+            type="MainViewModel" />
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        tools:context="com.ys.zy.catchoice.ui.activity.MainActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:titleTextColor="@color/blackTxtPrimary" />
+
+        </android.support.design.widget.AppBarLayout>
+
+        <include
+            android:id="@+id/content"
+            layout="@layout/content_recycler_view"
+            bind:viewModel="@{viewModel}" />
+
+        <com.ys.zy.catchoice.ui.widget.FloatingActionButtonsMenu
+            android:id="@+id/fab_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:orientation="vertical">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_add"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:onClick="@{() -> viewModel.onAddFabClick()}"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:srcCompat="@mipmap/ic_add_white_18dp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:onClick="@{(v) -> viewModel.onRemoveFabClick(v)}"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:srcCompat="@mipmap/ic_delete_white_18dp" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fab_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:onClick="@{() -> viewModel.onRandomFabClick()}"
+                app:backgroundTint="@color/colorAccent"
+                app:fabSize="mini"
+                app:srcCompat="@mipmap/ic_dialpad_white_18dp" />
+        </com.ys.zy.catchoice.ui.widget.FloatingActionButtonsMenu>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

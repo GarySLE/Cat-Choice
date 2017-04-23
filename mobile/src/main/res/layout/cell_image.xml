@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="content"
+            type="com.ys.zy.catchoice.content.ImageCellContent" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        style="@style/Card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/card_margin"
+        android:layout_marginRight="@dimen/card_margin"
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:stateListAnimator="@drawable/touch_lift"
+        app:cardBackgroundColor="@color/whiteSnow"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="@dimen/default_elevation">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:gravity="center"
+            tools:src="@mipmap/ic_launcher" />
+
+        <ImageView
+            android:id="@+id/iv_checked"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_circle_peach"
+            android:src="@mipmap/ic_pets_white_18dp" />
+    </android.support.v7.widget.CardView>
+</layout>

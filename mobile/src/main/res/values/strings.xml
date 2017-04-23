@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">Cat Choice</string>
+
+    <string name="dummy_button">Enter</string>
+    <string name="dummy_content">欢迎回来\n小瓜等你很久了～</string>
+    <string name="add_button">Add</string>
+    <string name="add_new_option_text">新增选项</string>
+    <string name="hint_add">请输入文字描述</string>
+    <string name="random_selected_text">小瓜要这个!~</string>
+    <string name="ok">OK</string>
+
+    <string name="name_share_element_text">share_text</string>
+    <string name="name_share_element_image">share_image</string>
+
+    <string-array name="list_eat">
+        <item>本帮江浙菜</item>
+        <item>日式料理</item>
+        <item>云南菜</item>
+        <item>泰国菜</item>
+        <item>粤菜</item>
+        <item>湘菜</item>
+        <item>火锅</item>
+        <item>麻辣香锅</item>
+        <item>小吃快餐</item>
+        <item>面包甜点</item>
+        <item>西餐</item>
+        <item>自助餐</item>
+        <item>韩国料理</item>
+        <item>烧烤</item>
+        <item>川菜</item>
+        <item>东南亚菜</item>
+        <item>素食</item>
+        <item>东北菜</item>
+        <item>新疆菜</item>
+        <item>海鲜</item>
+        <item>西北菜</item>
+        <item>蟹宴</item>
+        <item>台湾菜</item>
+        <item>贵州菜</item>
+        <item>清真菜</item>
+        <item>面馆</item>
+        <item>江西菜</item>
+        <item>私房菜</item>
+    </string-array>
+</resources>

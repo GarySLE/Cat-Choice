@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ys.zy.catchoice.viewModel.ListViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ListViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/content_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="com.ys.zy.catchoice.ui.activity.MainActivity"
+        tools:showIn="@layout/activity_main">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            bind:layoutManager="@{viewModel.manager}" />
+
+    </RelativeLayout>
+</layout>

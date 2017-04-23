@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/whiteSnow</color>
+    <color name="colorPrimaryDark">@color/sakura</color>
+    <color name="colorAccent">@color/peach</color>
+
+    <color name="blackOverlay">#66000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="alpha_white">#88FFFFFF</color>
+    <color name="whiteSnow">#FFFAFA</color>
+    <color name="whiteFlower">#FFFAF0</color>
+    <color name="whiteIvory">#FFFFF0</color>
+    <color name="whiteMilk">#FFFBF0</color>
+    <color name="shadow">#11000000</color>
+    <color name="blackTxtPrimary">#DE000000</color>
+    <color name="blackTxtPrimaryDark">#8a000000</color>
+
+    <color name="sakura">#FEDFE1</color>
+    <color name="peach">#F596AA</color>
+    <color name="red_plum">#E16B8C</color>
+
+    <color name="bgWindow">#00000000</color>
+    <color name="bgCard">@color/white</color>
+    <color name="bgButtonPressed">#F0F0F0</color>
+</resources>

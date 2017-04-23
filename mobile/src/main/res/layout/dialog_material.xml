@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:minWidth="350dp"
+    android:orientation="vertical"
+    android:padding="30dp">
+
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_material"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/contentView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/blackTxtPrimary"
+                android:textSize="24sp"
+                tools:text="Title" />
+
+            <ScrollView
+                android:id="@+id/root_message_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                tools:layout_height="300dp">
+
+                <LinearLayout
+                    android:id="@+id/message_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="25dp"
+                    android:paddingRight="25dp">
+
+                    <TextView
+                        android:id="@+id/message"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lineSpacingMultiplier="1.3"
+                        android:textColor="@color/blackTxtPrimaryDark"
+                        android:textSize="16sp"
+                        tools:text="Message" />
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/root_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="8dp"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/negative_button"
+                style="@style/ActionButton"
+                android:stateListAnimator="@drawable/touch_lift"
+                android:textColor="@color/blackTxtPrimary"
+                tools:text="CANCEL" />
+
+            <Button
+                android:id="@+id/position_button"
+                style="@style/ActionButton"
+                android:layout_marginEnd="15dp"
+                android:layout_marginStart="5dp"
+                android:stateListAnimator="@drawable/touch_lift"
+                android:textColor="@color/colorAccent"
+                tools:text="OK" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
