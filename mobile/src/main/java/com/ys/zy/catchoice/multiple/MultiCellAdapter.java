@@ -100,7 +100,7 @@ public class MultiCellAdapter extends DataBindingAdapter<MultiCell, MultiCellAda
 
     public void setEditable(boolean editable) {
         this.isEditable = editable;
-        if (!isEditable) {
+        if (!editable) {
             clearCheckedEditableCells();
         }
         this.notifyDataSetChanged();

@@ -156,9 +156,8 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
     }
 
     private void closeEditable() {
-        if (mAdapter.isEditable()) {
-            mAdapter.setEditable(false);
-        }
+        mAdapter.setEditable(false);
+        setDeleteFabState(R.mipmap.ic_delete_white_18dp, -DensityUtil.dip2px(mActivity, 10f));
     }
 
     /**
@@ -187,22 +186,19 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
 
         if (!mAdapter.isEditable()) {
             mAdapter.setEditable(true);
-            setDeleteFabState(v, R.mipmap.ic_delete_forever_white_18dp, DensityUtil.dip2px(mActivity, 10f));
+            setDeleteFabState(R.mipmap.ic_delete_forever_white_18dp, DensityUtil.dip2px(mActivity, 10f));
         } else {
             ArraySet<Integer> array = mAdapter.getCheckedEditableCells();
             for (int p : array) {
                 mAdapter.removeCell(p);
             }
-            mAdapter.clearCheckedEditableCells();
-            mAdapter.setEditable(false);
-            setDeleteFabState(v, R.mipmap.ic_delete_white_18dp, -DensityUtil.dip2px(mActivity, 10f));
+            closeEditable();
         }
     }
 
-    private void setDeleteFabState(@NonNull View v, int resId, float elevation) {
-        FloatingActionButton fab = (FloatingActionButton) v;
-        fab.setImageResource(resId);
-        fab.setCompatElevation(fab.getCompatElevation() + elevation);
+    private void setDeleteFabState(int resId, float elevation) {
+        mBinding.fabDelete.setImageResource(resId);
+        mBinding.fabDelete.setElevation(mBinding.fabDelete.getElevation() + elevation);
     }
 
     public void saveDate() {
