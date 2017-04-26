@@ -32,4 +32,13 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="SwitchCardView">
+        <attr name="eventType" format="enum">
+            <enum name="click" value="0" />
+            <enum name="touch" value="1" />
+        </attr>
+        <attr name="eventClickViewId" format="reference" />
+        <attr name="eventBackViewId" format="reference" />
+    </declare-styleable>
+
 </resources>
