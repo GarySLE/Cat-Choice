@@ -7,6 +7,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 /**
  * Created by Ys on 17/3/14.
  * GG Application
@@ -42,6 +45,13 @@ public class GGApp extends Application {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+        Realm.init(this);
+        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
+                .deleteRealmIfMigrationNeeded()
+                .name(getMetaValue(META_DB_NAME) + ".realm")
+                .schemaVersion((Long) getMetaValue(META_DB_VERSION))
+                .build());
     }
 
     public String getAppVersionName() {
