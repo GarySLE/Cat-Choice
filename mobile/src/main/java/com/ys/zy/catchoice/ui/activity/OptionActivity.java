@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.transition.TransitionSet;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.Window;
@@ -34,7 +35,7 @@ public class OptionActivity extends BaseActivity {
         }
 
         mViewModel = new OptionViewModel(this, binding);
-        mViewModel.initContent(getIntent());
+        mViewModel.analysisIntent(getIntent());
         binding.setViewModel(mViewModel);
 
         Window window = getWindow();
@@ -44,22 +45,26 @@ public class OptionActivity extends BaseActivity {
     }
 
     private Transition initEnterTransition() {
-        return TransitionInflater.from(this).inflateTransition(R.transition.fade);
+        TransitionSet set = new TransitionSet();
+        Transition fadeEnter = TransitionInflater.from(this).inflateTransition(R.transition.enter_fade);
+        set.addTransition(fadeEnter);
+        // add transition when no uri view shared element or no text view shared element.
+        mViewModel.resolveSharedElements(set);
+        return set;
     }
 
     private Transition initReturnTransition() {
-        return TransitionInflater.from(this).inflateTransition(R.transition.slide);
+        return TransitionInflater.from(this).inflateTransition(R.transition.return_slide);
     }
 
     private Transition initSharedElementEnterTransition(final View view) {
-        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.arc_motion);
+        Transition transition = TransitionInflater.from(this).inflateTransition(R.transition.share_bounds_arc);
         transition.addListener(new Transition.TransitionListener() {
             @Override
             public void onTransitionStart(Transition transition) {
                 Animator animator = ViewAnimationUtils.createCircularReveal(view,
                         view.getWidth() >> 1, view.getHeight() >> 1,
                         view.getWidth() >> 1, Math.max(view.getWidth(), view.getHeight()));
-                view.setBackgroundColor(getResources().getColor(R.color.peach));
                 animator.setDuration(500);
                 animator.start();
             }
@@ -91,11 +96,5 @@ public class OptionActivity extends BaseActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
-    }
-
-    @Override
-    public void onBackPressed() {
-        mViewModel.setScrollRootTransitionGroup();
-        super.onBackPressed();
     }
 }

@@ -11,14 +11,14 @@ import com.ys.zy.catchoice.databinding.ActivityMainBinding;
 import com.ys.zy.catchoice.multiple.MultiCell;
 import com.ys.zy.catchoice.viewModel.MainViewModel;
 
+import static com.ys.zy.catchoice.utils.IntentUtil.REQUEST_ALBUM;
+
 /**
  * Created by Ys on 16/12/28.
  * MainView
  */
 
 public class MainActivity extends BaseActivity {
-
-    public static final int REQUEST_ALBUM = 0x10;
 
     MainViewModel mViewModel;
 

@@ -33,7 +33,9 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColorPrimary">@color/blackTxtPrimary</item>
+    </style>
 
     <style name="ActionButton" parent="Widget.AppCompat.ActionButton">
         <item name="android:layout_width">wrap_content</item>
@@ -46,4 +48,11 @@
     </style>
 
     <style name="Card" parent="CardView" />
+
+    <style name="AlphaBlackStatusCover">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:background">@drawable/alpha_black_gradient</item>
+    </style>
 </resources>

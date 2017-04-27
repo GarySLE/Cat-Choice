@@ -34,6 +34,7 @@ public class SwitchCardView extends CardView {
 
     private View mCoverView;
     private View mRealView;
+    private int mSwitchEventType;
     private int mEventClickViewId;
     private int mEventBackViewId;
 
@@ -59,13 +60,19 @@ public class SwitchCardView extends CardView {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchCardView,
                 defStyleAttr, R.style.Card);
 
-        int mSwitchEventType = a.getInt(R.styleable.SwitchCardView_eventType, EVENT_TYPE_CLICK);
+        mSwitchEventType = a.getInt(R.styleable.SwitchCardView_eventType, EVENT_TYPE_CLICK);
         mEventClickViewId = a.getResourceId(R.styleable.SwitchCardView_eventClickViewId, 0);
         mEventBackViewId = a.getResourceId(R.styleable.SwitchCardView_eventBackViewId, 0);
 
+        a.recycle();
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
         int count = getChildCount();
         if (count != 2) {
-            throw new IllegalArgumentException("Must be only two child view in SwitchLayout!");
+            throw new IllegalArgumentException("Must be only two childs in SwitchCardView!");
         }
         mRealView = getChildAt(0);
         mCoverView = getChildAt(1);
@@ -82,8 +89,6 @@ public class SwitchCardView extends CardView {
         mRealView.setVisibility(GONE);
         mCoverView.setVisibility(VISIBLE);
         mCoverView.bringToFront();
-
-        a.recycle();
     }
 
     private void initRealBackClick() {
@@ -122,11 +127,11 @@ public class SwitchCardView extends CardView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        boolean flag = super.onTouchEvent(event);
         if (mSwitchTouchListener != null) {
             mSwitchTouchListener.onSwitchTouch(mCoverView, mRealView, event);
-            return true;
         }
-        return super.onTouchEvent(event);
+        return flag;
     }
 
     private class EventClickListener implements OnClickListener {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.ArraySet;
 import android.support.v4.util.Pair;
@@ -21,6 +20,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ys.zy.catchoice.R;
+import com.ys.zy.catchoice.constant.DataKeys;
 import com.ys.zy.catchoice.content.ICellContent;
 import com.ys.zy.catchoice.content.ImageCellContent;
 import com.ys.zy.catchoice.content.TextAndImageContent;
@@ -35,16 +35,18 @@ import com.ys.zy.catchoice.multiple.MultiplePool;
 import com.ys.zy.catchoice.provider.ImageCellProvider;
 import com.ys.zy.catchoice.provider.TextAndImageCellProvider;
 import com.ys.zy.catchoice.provider.TextCellProvider;
-import com.ys.zy.catchoice.ui.activity.MainActivity;
 import com.ys.zy.catchoice.ui.activity.OptionActivity;
 import com.ys.zy.catchoice.ui.dialog.MaterialDialog;
 import com.ys.zy.catchoice.ui.widget.BlankItemDecoration;
 import com.ys.zy.catchoice.utils.DensityUtil;
 import com.ys.zy.catchoice.utils.GlideUtil;
+import com.ys.zy.catchoice.utils.IntentUtil;
 import com.ys.zy.catchoice.utils.NumberUtil;
 import com.ys.zy.catchoice.utils.PhotoUtil;
 
 import java.util.List;
+
+import io.realm.Realm;
 
 /**
  * Created by Ys on 16/12/30.
@@ -100,7 +102,7 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         ICellContent content = cells.get(index).mContent;
         if (content instanceof TextCellContent) {
             mDialog = new MaterialDialog.Builder(mActivity)
-                    .setMessage(((TextCellContent) content).getText())
+                    .setMessage(((TextCellContent) content).getTxt())
                     .setCanceledOnTouchOutside(true)
                     .setPositiveButton(R.string.ok, new View.OnClickListener() {
                         @Override
@@ -121,9 +123,7 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-                intent.setType("image/*");
-                startActivityForResult(intent, MainActivity.REQUEST_ALBUM);
+                IntentUtil.goToImageContent(MainViewModel.this);
             }
         });
         mDialog = new MaterialDialog.Builder(mActivity)
@@ -202,6 +202,7 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
     }
 
     public void saveDate() {
+        Realm realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -212,20 +213,26 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         View text = view.findViewById(R.id.text);
         View image = view.findViewById(R.id.image);
         ActivityOptionsCompat activityOptionsCompat = null;
+        int shareElements = 0;
         if (text != null && image != null) {
             activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(mActivity,
-                    new Pair<>(text, getResources().getString(R.string.name_share_element_text)),
-                    new Pair<>(image, getResources().getString(R.string.name_share_element_image)));
+                    new Pair<>(text, getResources().getString(R.string.name_shared_element_text)),
+                    new Pair<>(image, getResources().getString(R.string.name_shared_element_image)));
+            shareElements = DataKeys.SHARED_ELEMENT_TEXT_AND_IMAGE;
         } else if (text != null) {
             activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    mActivity, text, getResources().getString(R.string.name_share_element_text));
+                    mActivity, text, getResources().getString(R.string.name_shared_element_text));
+            shareElements = DataKeys.SHARED_ELEMENT_TEXT;
         } else if (image != null) {
             activityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
-                    mActivity, image, getResources().getString(R.string.name_share_element_image));
+                    mActivity, image, getResources().getString(R.string.name_shared_element_image));
+            shareElements = DataKeys.SHARED_ELEMENT_IMAGE;
         }
 
         Bundle extras = activityOptionsCompat != null ? activityOptionsCompat.toBundle() : new Bundle();
         startActivity(new Intent(mActivity, OptionActivity.class)
-                .putExtra(OptionViewModel.KEY_CELL_CONTENT, cell), extras);
+                .putExtra(DataKeys.KEY_CELL_CONTENT, cell)
+                .putExtra(DataKeys.KEY_SHARED_ELEMENTS_SETUP, shareElements),
+                extras);
     }
 }

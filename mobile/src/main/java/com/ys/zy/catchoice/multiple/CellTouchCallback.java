@@ -1,14 +1,20 @@
 package com.ys.zy.catchoice.multiple;
 
+import android.animation.Animator;
+import android.animation.AnimatorInflater;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.databinding.ObservableArrayList;
 import android.os.Build;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.view.ViewOutlineProvider;
+import android.view.animation.AnimationUtils;
 
 import java.util.Collections;
 
+import com.ys.zy.catchoice.R;
 import com.ys.zy.catchoice.utils.DensityUtil;
 
 /**
@@ -73,7 +79,9 @@ public class CellTouchCallback extends ItemTouchHelper.Callback {
         super.onSelectedChanged(viewHolder, actionState);
         if (ItemTouchHelper.ACTION_STATE_DRAG == actionState) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                viewHolder.itemView.setElevation(DensityUtil.dip2px(mCtx, 10));
+                Animator animator = AnimatorInflater.loadAnimator(mCtx, R.animator.touch_up);
+                animator.setTarget(viewHolder.itemView);
+                animator.start();
             } else {
                 viewHolder.itemView.setAlpha(0.5f);
             }
@@ -84,7 +92,9 @@ public class CellTouchCallback extends ItemTouchHelper.Callback {
     public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            viewHolder.itemView.setElevation(1);
+            Animator animator = AnimatorInflater.loadAnimator(mCtx, R.animator.touch_down);
+            animator.setTarget(viewHolder.itemView);
+            animator.start();
         } else {
             viewHolder.itemView.setAlpha(1.0f);
         }

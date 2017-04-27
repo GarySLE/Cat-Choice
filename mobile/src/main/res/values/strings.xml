@@ -9,8 +9,8 @@
     <string name="random_selected_text">小瓜要这个!~</string>
     <string name="ok">OK</string>
 
-    <string name="name_share_element_text">share_text</string>
-    <string name="name_share_element_image">share_image</string>
+    <string name="name_shared_element_text">shared_text</string>
+    <string name="name_shared_element_image">shared_image</string>
 
     <string-array name="list_eat">
         <item>本帮江浙菜</item>
