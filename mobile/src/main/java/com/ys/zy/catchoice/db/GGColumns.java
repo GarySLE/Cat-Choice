@@ -17,4 +17,19 @@ public class GGColumns implements BaseColumns {
 
     @Column
     public static final String ADDRESS = "address";
+
+    @Column
+    public static final String REMARK_1 = "remark_1";
+
+    @Column
+    public static final String REMARK_2 = "remark_2";
+
+    @Column
+    public static final String REMARK_3 = "remark_3";
+
+    @Column
+    public static final String REMARK_4 = "remark_4";
+
+    @Column
+    public static final String REMARK_5 = "remark_5";
 }

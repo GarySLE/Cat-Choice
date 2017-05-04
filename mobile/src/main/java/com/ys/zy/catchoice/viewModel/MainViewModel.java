@@ -1,6 +1,7 @@
 package com.ys.zy.catchoice.viewModel;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
@@ -19,13 +20,17 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.ys.zy.catchoice.GGApp;
 import com.ys.zy.catchoice.R;
+import com.ys.zy.catchoice.constant.DataFlags;
 import com.ys.zy.catchoice.constant.DataKeys;
 import com.ys.zy.catchoice.content.ICellContent;
 import com.ys.zy.catchoice.content.ImageCellContent;
 import com.ys.zy.catchoice.content.TextAndImageContent;
 import com.ys.zy.catchoice.content.TextCellContent;
 import com.ys.zy.catchoice.databinding.ActivityMainBinding;
+import com.ys.zy.catchoice.db.GGColumns;
+import com.ys.zy.catchoice.db.SQLiteOperator;
 import com.ys.zy.catchoice.listener.OnCellClickListener;
 import com.ys.zy.catchoice.multiple.CellTouchCallback;
 import com.ys.zy.catchoice.multiple.MultiCell;
@@ -46,8 +51,6 @@ import com.ys.zy.catchoice.utils.PhotoUtil;
 
 import java.util.List;
 
-import io.realm.Realm;
-
 /**
  * Created by Ys on 16/12/30.
  * MainViewModel
@@ -58,11 +61,13 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
     private ActivityMainBinding mBinding;
     private Handler mHandler;
     private MaterialDialog mDialog;
+    private SQLiteOperator mDBOperator;
 
     public MainViewModel(Activity activity, ActivityMainBinding binding) {
         super(activity);
         this.mBinding = binding;
         this.mHandler = new Handler(Looper.getMainLooper());
+        this.mDBOperator = new SQLiteOperator(GGApp.getApp().getDefaultDBHelper());
     }
 
     public void initList() {
@@ -201,8 +206,21 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         mBinding.fabDelete.setElevation(mBinding.fabDelete.getElevation() + elevation);
     }
 
-    public void saveDate() {
-        Realm realm = Realm.getDefaultInstance();
+    public void saveOption(MultiCell cell) {
+        if (cell == null) return;
+        ICellContent content = cell.mContent;
+        ContentValues optionValues = new ContentValues();
+        optionValues.put(GGColumns.TITLE, content.getStringData(DataFlags.FLAG_TITLE));
+        optionValues.put(GGColumns.URI_IMAGE, content.getStringData(DataFlags.FLAG_IMAGE));
+        mDBOperator.insert(GGColumns.class, optionValues);
+    }
+
+    public void saveAllOption() {
+        if (mAdapter == null) return;
+        List<MultiCell> cells = mAdapter.getCells();
+        for (MultiCell cell : cells) {
+            saveOption(cell);
+        }
     }
 
     @Override
@@ -231,8 +249,8 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
 
         Bundle extras = activityOptionsCompat != null ? activityOptionsCompat.toBundle() : new Bundle();
         startActivity(new Intent(mActivity, OptionActivity.class)
-                .putExtra(DataKeys.KEY_CELL_CONTENT, cell)
-                .putExtra(DataKeys.KEY_SHARED_ELEMENTS_SETUP, shareElements),
+                        .putExtra(DataKeys.KEY_CELL_CONTENT, cell)
+                        .putExtra(DataKeys.KEY_SHARED_ELEMENTS_SETUP, shareElements),
                 extras);
     }
 }

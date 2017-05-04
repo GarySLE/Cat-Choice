@@ -4,11 +4,11 @@ import android.app.Application;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
+import com.ys.zy.catchoice.db.GGDBHelper;
 
 /**
  * Created by Ys on 17/3/14.
@@ -21,6 +21,8 @@ public class GGApp extends Application {
     protected static final String META_DB_VERSION = "db_version";
 
     private Bundle mMetaData;
+
+    private GGDBHelper mDBHelper;
 
     private static GGApp instance;
 
@@ -46,12 +48,17 @@ public class GGApp extends Application {
             e.printStackTrace();
         }
 
-        Realm.init(this);
-        Realm.setDefaultConfiguration(new RealmConfiguration.Builder()
-                .deleteRealmIfMigrationNeeded()
-                .name(getMetaValue(META_DB_NAME) + ".realm")
-                .schemaVersion((Long) getMetaValue(META_DB_VERSION))
-                .build());
+        String name = (String) getMetaValue(META_DB_NAME);
+        int version = (Integer) getMetaValue(META_DB_VERSION);
+        mDBHelper = new GGDBHelper(this, name, version);
+    }
+
+    @Override
+    public void onTerminate() {
+        if (mDBHelper != null) {
+            mDBHelper.close();
+        }
+        super.onTerminate();
     }
 
     public String getAppVersionName() {
@@ -85,5 +92,9 @@ public class GGApp extends Application {
 
     public Object getMetaValue(String metaKey) {
         return mMetaData == null ? "" : mMetaData.get(metaKey);
+    }
+
+    public SQLiteOpenHelper getDefaultDBHelper() {
+        return mDBHelper;
     }
 }
