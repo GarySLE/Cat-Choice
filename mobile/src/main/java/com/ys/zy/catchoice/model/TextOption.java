@@ -7,10 +7,10 @@ package com.ys.zy.catchoice.model;
 
 public class TextOption implements IOption {
 
-    public String mTxt;
+    public String txt;
 
     public TextOption(String txt) {
-        this.mTxt = txt;
+        this.txt = txt;
     }
 
 }

@@ -2,7 +2,7 @@ package com.ys.zy.catchoice.content;
 
 import android.support.annotation.NonNull;
 
-import com.ys.zy.catchoice.constant.DataFlag;
+import com.ys.zy.catchoice.constant.DataFlags;
 import com.ys.zy.catchoice.model.ImageOption;
 
 /**
@@ -19,12 +19,12 @@ public class ImageCellContent implements ICellContent {
     }
 
     public String getImage() {
-        return this.mOption.mImageUri;
+        return this.mOption.uri;
     }
 
     @Override
     public String getStringData(int flag) {
-        if (DataFlag.FLAG_IMAGE == flag) {
+        if (DataFlags.FLAG_IMAGE == flag) {
             return getImage();
         }
         return "";

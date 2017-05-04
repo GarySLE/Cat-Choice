@@ -7,10 +7,10 @@ package com.ys.zy.catchoice.model;
 
 public class ImageOption implements IOption {
 
-    public String mImageUri;
+    public String uri;
 
     public ImageOption(String imageUri) {
-        this.mImageUri = imageUri;
+        this.uri = imageUri;
     }
 
 }
