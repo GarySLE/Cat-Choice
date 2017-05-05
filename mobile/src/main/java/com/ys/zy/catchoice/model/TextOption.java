@@ -5,11 +5,12 @@ package com.ys.zy.catchoice.model;
  * 文字选项
  */
 
-public class TextOption implements IOption {
+public class TextOption extends BaseOption {
 
     public String txt;
 
     public TextOption(String txt) {
+        super();
         this.txt = txt;
     }
 

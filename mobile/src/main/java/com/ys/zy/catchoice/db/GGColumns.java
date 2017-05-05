@@ -15,6 +15,9 @@ public class GGColumns implements BaseColumns {
     @Column
     public static final String URI_IMAGE = "uri_image";
 
+    @Column(type = Column.Type.INTEGER)
+    public static final String STAR = "star";
+
     @Column
     public static final String ADDRESS = "address";
 

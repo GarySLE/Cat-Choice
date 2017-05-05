@@ -11,8 +11,15 @@ public interface ICellContent extends Serializable {
 
     /**
      * 获取String数据
-     * @param flag use DataFlag constant
+     * @param flag use DataFlags in constant package
      * @return String
      */
     String getStringData(int flag);
+
+    /**
+     * 获取Int数据
+     * @param flag use DataFlags in constant package
+     * @return int
+     */
+    int getIntData(int flag);
 }

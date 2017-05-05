@@ -5,13 +5,14 @@ package com.ys.zy.catchoice.model;
  * 图文选项
  */
 
-public class TextAndImageOption implements IOption {
+public class TextAndImageOption extends BaseOption {
 
     private TextOption txt;
 
     private ImageOption image;
 
     public TextAndImageOption(String txt, String imageUri) {
+        super();
         this.txt = new TextOption(txt);
         this.image = new ImageOption(imageUri);
     }

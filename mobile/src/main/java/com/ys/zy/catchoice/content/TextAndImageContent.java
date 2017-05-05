@@ -13,18 +13,18 @@ import com.ys.zy.catchoice.model.TextAndImageOption;
 public class TextAndImageContent implements ICellContent {
 
     @NonNull
-    private TextAndImageOption mTextAndImageOption;
+    private TextAndImageOption mOption;
 
     public TextAndImageContent(@NonNull String text, @NonNull String image) {
-        this.mTextAndImageOption = new TextAndImageOption(text, image);
+        this.mOption = new TextAndImageOption(text, image);
     }
 
     public String getImage() {
-        return this.mTextAndImageOption.getImage();
+        return this.mOption.getImage();
     }
 
     public String getTxt() {
-        return this.mTextAndImageOption.getTxt();
+        return this.mOption.getTxt();
     }
 
     @Override
@@ -37,5 +37,13 @@ public class TextAndImageContent implements ICellContent {
             default:
                 return "";
         }
+    }
+
+    @Override
+    public int getIntData(int flag) {
+        if (DataFlags.FLAG_STAR == flag) {
+            return mOption.star;
+        }
+        return 0;
     }
 }

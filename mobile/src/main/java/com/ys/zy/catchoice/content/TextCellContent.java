@@ -29,4 +29,12 @@ public class TextCellContent implements ICellContent {
         }
         return "";
     }
+
+    @Override
+    public int getIntData(int flag) {
+        if (DataFlags.FLAG_STAR == flag) {
+            return mOption.star;
+        }
+        return 0;
+    }
 }

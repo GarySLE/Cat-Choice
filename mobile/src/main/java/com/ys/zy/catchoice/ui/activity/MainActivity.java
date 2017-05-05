@@ -49,6 +49,12 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        mViewModel.saveAllOption();
+        super.onDestroy();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putSerializable("data", mViewModel.getAdapter().getCells());

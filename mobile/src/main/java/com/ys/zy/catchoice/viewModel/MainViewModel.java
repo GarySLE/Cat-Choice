@@ -21,6 +21,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ys.zy.catchoice.GGApp;
+import com.ys.zy.catchoice.Manager.OptionManager;
 import com.ys.zy.catchoice.R;
 import com.ys.zy.catchoice.constant.DataFlags;
 import com.ys.zy.catchoice.constant.DataKeys;
@@ -208,11 +209,10 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
 
     public void saveOption(MultiCell cell) {
         if (cell == null) return;
-        ICellContent content = cell.mContent;
-        ContentValues optionValues = new ContentValues();
-        optionValues.put(GGColumns.TITLE, content.getStringData(DataFlags.FLAG_TITLE));
-        optionValues.put(GGColumns.URI_IMAGE, content.getStringData(DataFlags.FLAG_IMAGE));
-        mDBOperator.insert(GGColumns.class, optionValues);
+        OptionManager.updateOrAdd(mDBOperator, cell, new String[]{
+                cell.mContent.getStringData(DataFlags.FLAG_TITLE),
+                cell.mContent.getStringData(DataFlags.FLAG_IMAGE)
+        });
     }
 
     public void saveAllOption() {

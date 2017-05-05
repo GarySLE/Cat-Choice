@@ -306,8 +306,8 @@ public class SQLiteOperator {
      * @param whereArgs
      * @param values
      */
-    synchronized public final void updateOrInsert(String table, String whereClause,
-                                                  String[] whereArgs, ContentValues values) {
+    synchronized public final void updateOrInsert(String table, ContentValues values, String whereClause,
+                                                  String[] whereArgs) {
         SQLiteDatabase db = getWritable();
         Cursor c = db.query(table, null, whereClause, whereArgs, null, null,
                 null);
@@ -322,9 +322,9 @@ public class SQLiteOperator {
         }
     }
 
-    public final void updateOrInsert(Class<?> table, String whereClause,
-                                     String[] whereArgs, ContentValues values) {
-        updateOrInsert(table.getSimpleName(), whereClause, whereArgs, values);
+    public final void updateOrInsert(Class<?> table, ContentValues values, String whereClause,
+                                     String[] whereArgs) {
+        updateOrInsert(table.getSimpleName(), values, whereClause, whereArgs);
     }
 
     public final void insert(String table, ContentValues values) {

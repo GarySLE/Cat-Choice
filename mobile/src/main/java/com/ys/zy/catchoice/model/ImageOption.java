@@ -5,11 +5,12 @@ package com.ys.zy.catchoice.model;
  * 图形选项
  */
 
-public class ImageOption implements IOption {
+public class ImageOption extends BaseOption {
 
     public String uri;
 
     public ImageOption(String imageUri) {
+        super();
         this.uri = imageUri;
     }
 
