@@ -14,4 +14,9 @@ public class TextOption extends BaseOption {
         this.txt = txt;
     }
 
+    public TextOption(String txt, int star) {
+        super(star);
+        this.txt = txt;
+    }
+
 }

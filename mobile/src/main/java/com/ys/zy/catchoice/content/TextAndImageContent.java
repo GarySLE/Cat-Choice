@@ -19,6 +19,10 @@ public class TextAndImageContent implements ICellContent {
         this.mOption = new TextAndImageOption(text, image);
     }
 
+    public TextAndImageContent(@NonNull TextAndImageOption option) {
+        this.mOption = option;
+    }
+
     public String getImage() {
         return this.mOption.getImage();
     }

@@ -14,4 +14,9 @@ public class ImageOption extends BaseOption {
         this.uri = imageUri;
     }
 
+    public ImageOption(String imageUri, int star) {
+        super(star);
+        this.uri = imageUri;
+    }
+
 }

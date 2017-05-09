@@ -18,6 +18,10 @@ public class ImageCellContent implements ICellContent {
         this.mOption = new ImageOption(imageUri);
     }
 
+    public ImageCellContent(@NonNull ImageOption option) {
+        this.mOption = option;
+    }
+
     public String getImage() {
         return this.mOption.uri;
     }

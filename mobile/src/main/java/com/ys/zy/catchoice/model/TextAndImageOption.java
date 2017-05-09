@@ -7,29 +7,35 @@ package com.ys.zy.catchoice.model;
 
 public class TextAndImageOption extends BaseOption {
 
-    private TextOption txt;
+    private String txt;
 
-    private ImageOption image;
+    private String image;
+
+    public TextAndImageOption(String txt, String imageUri, int star) {
+        super(star);
+        this.txt = txt;
+        this.image = imageUri;
+    }
 
     public TextAndImageOption(String txt, String imageUri) {
         super();
-        this.txt = new TextOption(txt);
-        this.image = new ImageOption(imageUri);
+        this.txt = txt;
+        this.image = imageUri;
     }
 
     public void setTxt(String txt) {
-        this.txt.txt = txt;
+        this.txt = txt;
     }
 
     public void setImage(String image) {
-        this.image.uri = image;
+        this.image = image;
     }
 
     public String getTxt() {
-        return this.txt.txt;
+        return this.txt;
     }
 
     public String getImage() {
-        return this.image.uri;
+        return this.image;
     }
 }

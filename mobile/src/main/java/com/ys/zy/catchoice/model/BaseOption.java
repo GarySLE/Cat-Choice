@@ -15,4 +15,7 @@ public class BaseOption implements Serializable {
         this.star = 0;
     }
 
+    public BaseOption(int star) {
+        this.star = star;
+    }
 }

@@ -1,8 +1,8 @@
 package com.ys.zy.catchoice.viewModel;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
 import android.os.Handler;
@@ -44,6 +44,7 @@ import com.ys.zy.catchoice.provider.TextCellProvider;
 import com.ys.zy.catchoice.ui.activity.OptionActivity;
 import com.ys.zy.catchoice.ui.dialog.MaterialDialog;
 import com.ys.zy.catchoice.ui.widget.BlankItemDecoration;
+import com.ys.zy.catchoice.utils.CellUtil;
 import com.ys.zy.catchoice.utils.DensityUtil;
 import com.ys.zy.catchoice.utils.GlideUtil;
 import com.ys.zy.catchoice.utils.IntentUtil;
@@ -72,13 +73,25 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
     }
 
     public void initList() {
-        // 吃货测试列表
         MultiCellFactory factory = new MultiCellFactory.Builder().build();
         ObservableArrayList<MultiCell> contents = new ObservableArrayList<>();
 
-        String[] foods = mActivity.getResources().getStringArray(R.array.list_eat);
-        for (String food : foods)
-            contents.add(factory.newCell(new TextCellContent(food), null));
+        Cursor cursor = mDBOperator.query(GGColumns.class, null, null);
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            do {
+                ICellContent content = CellUtil.getCellContentFromDatabase(cursor);
+                if (content != null) {
+                    contents.add(factory.newCell(content));
+                }
+            } while (cursor.moveToNext());
+        } else {
+            // 吃货测试列表
+            String[] foods = mActivity.getResources().getStringArray(R.array.list_eat);
+            for (String food : foods) {
+                contents.add(factory.newCell(new TextCellContent(food)));
+            }
+        }
 
         MultiplePool pool = MultiplePool.getInstance();
         pool.register(TextCellContent.class, new TextCellProvider());

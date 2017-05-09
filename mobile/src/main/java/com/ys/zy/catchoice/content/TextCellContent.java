@@ -18,6 +18,10 @@ public class TextCellContent implements ICellContent {
         this.mOption = new TextOption(txt);
     }
 
+    public TextCellContent(@NonNull TextOption option) {
+        this.mOption = option;
+    }
+
     public String getTxt() {
         return this.mOption.txt;
     }

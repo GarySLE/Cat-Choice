@@ -4,6 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -67,7 +68,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Field[] fields = clazz.getFields();
         StringBuilder sb = new StringBuilder();
         sb.append(" ( ");
-        List<String> cols = new ArrayList<String>();
+        List<String> cols = new ArrayList<>();
         if (isNeedAdd_ID)
             cols.add(BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT");
         for (Field field : fields) {

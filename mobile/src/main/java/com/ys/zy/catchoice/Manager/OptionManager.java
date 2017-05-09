@@ -2,6 +2,7 @@ package com.ys.zy.catchoice.Manager;
 
 import android.content.ContentValues;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 import com.ys.zy.catchoice.constant.DataFlags;
@@ -37,9 +38,9 @@ public class OptionManager {
     }
 
     public static void updateOrAdd(@NonNull SQLiteOperator operator, @NonNull MultiCell cell,
-                                   @NonNull String[] selection) {
-        if (selection.length < 2) {
-            throw new IllegalArgumentException("need 2 selection string!");
+                                   @Nullable String[] selection) {
+        if (selection == null || selection.length < 2) {
+            add(operator, cell);
         }
 
         String where = getWhereString(selection);
