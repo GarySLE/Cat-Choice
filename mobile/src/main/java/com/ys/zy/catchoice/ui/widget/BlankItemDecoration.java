@@ -25,9 +25,10 @@ public class BlankItemDecoration extends RecyclerView.ItemDecoration {
 
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        if (VERTICAL == mOrientation)
+        if (VERTICAL == mOrientation) {
             outRect.set(0, mDistance, 0, 0);
-        else if (HORIZONTAL == mOrientation)
+        } else if (HORIZONTAL == mOrientation) {
             outRect.set(mDistance, 0, 0, 0);
+        }
     }
 }

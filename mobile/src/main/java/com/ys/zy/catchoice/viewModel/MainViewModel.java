@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.databinding.ObservableArrayList;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.util.ArraySet;
@@ -55,20 +53,18 @@ import java.util.List;
 
 /**
  * Created by Ys on 16/12/30.
- * MainViewModel
+ * Main ViewModel
  */
 
 public class MainViewModel extends ListViewModel implements OnCellClickListener {
 
     private ActivityMainBinding mBinding;
-    private Handler mHandler;
     private MaterialDialog mDialog;
     private SQLiteOperator mDBOperator;
 
     public MainViewModel(Activity activity, ActivityMainBinding binding) {
         super(activity);
         this.mBinding = binding;
-        this.mHandler = new Handler(Looper.getMainLooper());
         this.mDBOperator = new SQLiteOperator(GGApp.getApp().getDefaultDBHelper());
     }
 
@@ -98,7 +94,7 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         pool.register(ImageCellContent.class, new ImageCellProvider());
         pool.register(TextAndImageContent.class, new TextAndImageCellProvider());
 
-        mAdapter = new MultiCellAdapter(mActivity, contents);
+        mAdapter.addAllCells(contents);
         mAdapter.setOnCellClickListener(this);
 
         RecyclerView rvList = mBinding.content.rvList;

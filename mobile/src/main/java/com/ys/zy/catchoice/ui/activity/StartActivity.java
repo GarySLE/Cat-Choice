@@ -11,7 +11,7 @@ import com.ys.zy.catchoice.R;
 
 /**
  * Created by Ys on 16/12/28.
- * StartView
+ * Start View
  * <p>
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.

@@ -8,7 +8,7 @@ import android.support.annotation.NonNull;
 
 /**
  * Created by Ys on 17/3/9.
- * BaseViewModel
+ * Base ViewModel
  */
 
 public class BaseViewModel implements IViewModel {

@@ -15,7 +15,7 @@ import static com.ys.zy.catchoice.utils.IntentUtil.REQUEST_ALBUM;
 
 /**
  * Created by Ys on 16/12/28.
- * MainView
+ * Main View
  */
 
 public class MainActivity extends BaseActivity {

@@ -1,5 +1,7 @@
 package com.ys.zy.catchoice.model;
 
+import android.databinding.ObservableField;
+
 /**
  * Created by Ys on 17/3/13.
  * 图形选项
@@ -7,16 +9,16 @@ package com.ys.zy.catchoice.model;
 
 public class ImageOption extends BaseOption {
 
-    public String uri;
+    public ObservableField<String> uri;
 
     public ImageOption(String imageUri) {
         super();
-        this.uri = imageUri;
+        this.uri = new ObservableField<>(imageUri);
     }
 
     public ImageOption(String imageUri, int star) {
         super(star);
-        this.uri = imageUri;
+        this.uri = new ObservableField<>(imageUri);
     }
 
 }

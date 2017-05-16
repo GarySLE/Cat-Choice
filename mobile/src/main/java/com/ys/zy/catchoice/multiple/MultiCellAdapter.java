@@ -47,6 +47,11 @@ public class MultiCellAdapter extends DataBindingAdapter<MultiCell, MultiCellAda
     private OnCellClickListener mOnCellClickListener;
     private OnViewHolderBindingListener mOnViewHolderBindingListener;
 
+    public MultiCellAdapter(@NonNull Context ctx) {
+        super(ctx);
+        this.mCheckedEditableCells = new ArraySet<>();
+    }
+
     public MultiCellAdapter(@NonNull Context ctx, @NonNull ObservableArrayList<MultiCell> cells) {
         super(ctx, cells);
         this.mCheckedEditableCells = new ArraySet<>();

@@ -46,7 +46,7 @@ public class TextAndImageContent implements ICellContent {
     @Override
     public int getIntData(int flag) {
         if (DataFlags.FLAG_STAR == flag) {
-            return mOption.star;
+            return mOption.star.get();
         }
         return 0;
     }

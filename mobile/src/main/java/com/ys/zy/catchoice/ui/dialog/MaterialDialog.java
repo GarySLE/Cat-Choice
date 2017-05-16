@@ -28,7 +28,8 @@ import com.ys.zy.catchoice.utils.ViewUtil;
 
 public class MaterialDialog {
 
-    @NonNull private Context mCtx;
+    @NonNull
+    private Context mCtx;
     private AlertDialog mDialog;
 
     private TextView mTitleView;
@@ -44,7 +45,8 @@ public class MaterialDialog {
 
     public static class Builder {
 
-        @NonNull Context mCtx;
+        @NonNull
+        Context mCtx;
         Window mDialogWindow;
         View mView;
         View mContentView;
@@ -75,10 +77,12 @@ public class MaterialDialog {
             materialDialog.mDialog.show();
 
             mDialogWindow = materialDialog.mDialog.getWindow();
-            mDialogWindow.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
-                    | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
-            mDialogWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE);
-            mDialogWindow.setBackgroundDrawableResource(R.drawable.bg_dialog_window);
+            if (mDialogWindow != null) {
+                mDialogWindow.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+                        | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
+                mDialogWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_MASK_STATE);
+                mDialogWindow.setBackgroundDrawableResource(R.drawable.bg_dialog_window);
+            }
 
             View contentView = LayoutInflater.from(mCtx).inflate(R.layout.dialog_material, null);
             contentView.setFocusable(true);

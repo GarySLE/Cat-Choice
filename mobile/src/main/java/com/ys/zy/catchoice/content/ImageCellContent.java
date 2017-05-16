@@ -23,7 +23,7 @@ public class ImageCellContent implements ICellContent {
     }
 
     public String getImage() {
-        return this.mOption.uri;
+        return this.mOption.uri.get();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ImageCellContent implements ICellContent {
     @Override
     public int getIntData(int flag) {
         if (DataFlags.FLAG_STAR == flag) {
-            return mOption.star;
+            return mOption.star.get();
         }
         return 0;
     }

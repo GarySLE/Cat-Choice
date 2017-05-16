@@ -1,5 +1,7 @@
 package com.ys.zy.catchoice.model;
 
+import android.databinding.ObservableField;
+
 /**
  * Created by Ys on 17/5/1.
  * 图文选项
@@ -7,35 +9,35 @@ package com.ys.zy.catchoice.model;
 
 public class TextAndImageOption extends BaseOption {
 
-    private String txt;
+    private ObservableField<String> txt;
 
-    private String image;
+    private ObservableField<String> image;
 
     public TextAndImageOption(String txt, String imageUri, int star) {
         super(star);
-        this.txt = txt;
-        this.image = imageUri;
+        this.txt = new ObservableField<>(txt);
+        this.image = new ObservableField<>(imageUri);
     }
 
     public TextAndImageOption(String txt, String imageUri) {
         super();
-        this.txt = txt;
-        this.image = imageUri;
+        this.txt = new ObservableField<>(txt);
+        this.image = new ObservableField<>(imageUri);
     }
 
     public void setTxt(String txt) {
-        this.txt = txt;
+        this.txt.set(txt);
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.image.set(image);
     }
 
     public String getTxt() {
-        return this.txt;
+        return this.txt.get();
     }
 
     public String getImage() {
-        return this.image;
+        return this.image.get();
     }
 }

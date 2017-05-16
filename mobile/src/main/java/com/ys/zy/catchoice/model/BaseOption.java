@@ -1,5 +1,7 @@
 package com.ys.zy.catchoice.model;
 
+import android.databinding.ObservableField;
+
 import java.io.Serializable;
 
 /**
@@ -9,13 +11,13 @@ import java.io.Serializable;
 
 public class BaseOption implements Serializable {
 
-    public int star;
+    public ObservableField<Integer> star;
 
     public BaseOption() {
-        this.star = 0;
+        this.star = new ObservableField<>(0);
     }
 
     public BaseOption(int star) {
-        this.star = star;
+        this.star = new ObservableField<>(star);
     }
 }

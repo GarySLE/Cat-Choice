@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.ys.zy.catchoice.viewModel.ChoiceViewModel" />
+
+        <variable
+            name="viewModel"
+            type="ChoiceViewModel" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.ys.zy.catchoice.ui.activity.ChoiceActivity">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="@{viewModel.manager}" />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

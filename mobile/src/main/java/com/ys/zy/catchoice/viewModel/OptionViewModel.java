@@ -21,7 +21,7 @@ import com.ys.zy.catchoice.utils.IntentUtil;
 
 /**
  * Created by Ys on 17/4/18.
- * OptionViewModel
+ * Option ViewModel
  */
 
 public class OptionViewModel extends BaseViewModel {

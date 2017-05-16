@@ -23,7 +23,7 @@ public class TextCellContent implements ICellContent {
     }
 
     public String getTxt() {
-        return this.mOption.txt;
+        return this.mOption.txt.get();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class TextCellContent implements ICellContent {
     @Override
     public int getIntData(int flag) {
         if (DataFlags.FLAG_STAR == flag) {
-            return mOption.star;
+            return mOption.star.get();
         }
         return 0;
     }
