@@ -111,22 +111,24 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
     public void onRandomFabClick() {
         closeEditable();
 
-        List<MultiCell> cells = mAdapter.getCells();
-        if (cells.isEmpty()) return;
-        int index = NumberUtil.randomInt(0, cells.size());
-        ICellContent content = cells.get(index).mContent;
-        if (content instanceof TextCellContent) {
-            mDialog = new MaterialDialog.Builder(mActivity)
-                    .setMessage(((TextCellContent) content).getTxt())
-                    .setCanceledOnTouchOutside(true)
-                    .setPositiveButton(R.string.ok, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            mDialog.dismiss();
-                        }
-                    })
-                    .create();
-        }
+        // TODO: 17/5/18 go to choice activity
+
+//        List<MultiCell> cells = mAdapter.getCells();
+//        if (cells.isEmpty()) return;
+//        int index = NumberUtil.randomInt(0, cells.size());
+//        ICellContent content = cells.get(index).mContent;
+//        if (content instanceof TextCellContent) {
+//            mDialog = new MaterialDialog.Builder(mActivity)
+//                    .setMessage(((TextCellContent) content).getTxt())
+//                    .setCanceledOnTouchOutside(true)
+//                    .setPositiveButton(R.string.ok, new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            mDialog.dismiss();
+//                        }
+//                    })
+//                    .create();
+//        }
     }
 
     public void onAddFabClick() {

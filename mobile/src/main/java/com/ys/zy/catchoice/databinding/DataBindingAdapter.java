@@ -78,9 +78,9 @@ public abstract class DataBindingAdapter<T, VH extends DataBindingAdapter.Observ
         return this.mCells.isEmpty();
     }
 
-    public static class ObservableViewHolder extends RecyclerView.ViewHolder {
+    public static class ObservableViewHolder<DB extends ViewDataBinding> extends RecyclerView.ViewHolder {
 
-        public ViewDataBinding mBinding;
+        public DB mBinding;
 
         public ObservableViewHolder(@NonNull View view) {
             super(view);

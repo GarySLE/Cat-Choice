@@ -66,7 +66,7 @@ public class MultiCellAdapter extends DataBindingAdapter<MultiCell, MultiCellAda
     @Override
     public MultiCellViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mInflater == null) {
-            mInflater = LayoutInflater.from(parent.getContext());
+            mInflater = LayoutInflater.from(mCtx);
         }
 
         return MultiplePool.getInstance().getProvider(viewType)

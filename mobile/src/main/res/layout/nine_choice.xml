@@ -1,32 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.ys.zy.catchoice.ui.widget.SwitchCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/choice_switcher"
-    android:layout_width="77dp"
-    android:layout_height="77dp"
-    app:cardCornerRadius="39dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_choice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cardCornerRadius="39dp"
-        app:cardBackgroundColor="@color/peach">
+    <data>
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:maxWidth="50dp" />
+        <import type="com.ys.zy.catchoice.model.Choice" />
 
-    </android.support.v7.widget.CardView>
+        <import type="android.view.View" />
 
-    <ImageView
-        android:id="@+id/bg_choice"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <variable
+            name="content"
+            type="Choice" />
+    </data>
 
-</com.ys.zy.catchoice.ui.widget.SwitchCardView>
+    <com.ys.zy.catchoice.ui.widget.SwitchCardView
+        android:id="@+id/choice_switcher"
+        android:layout_width="77dp"
+        android:layout_height="77dp"
+        app:cardCornerRadius="39dp">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card_choice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:cardCornerRadius="39dp">
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="@{content.noImage ? View.GONE : View.VISIBLE}" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/DefaultText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:maxWidth="50dp"
+                android:text="@{content.title}"
+                android:visibility="@{content.noTitle ? View.GONE : View.VISIBLE}" />
+
+        </android.support.v7.widget.CardView>
+
+        <ImageView
+            android:id="@+id/bg_choice"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_circle_peach"
+            android:src="@mipmap/ic_pets_white_18dp" />
+
+    </com.ys.zy.catchoice.ui.widget.SwitchCardView>
+</layout>

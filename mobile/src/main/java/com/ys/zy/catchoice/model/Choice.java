@@ -3,6 +3,7 @@ package com.ys.zy.catchoice.model;
 import android.databinding.ObservableField;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 
 /**
  * Created by Ys on 17/5/12.
@@ -11,8 +12,8 @@ import android.os.Parcelable;
 
 public class Choice implements Parcelable {
 
-    public ObservableField<String> title;
-    public ObservableField<String> uri;
+    private ObservableField<String> title;
+    private ObservableField<String> uri;
 
     public Choice(String title, String uri) {
         this.title = new ObservableField<>(title);
@@ -45,5 +46,29 @@ public class Choice implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(title.get());
         dest.writeString(uri.get());
+    }
+
+    public boolean isNoImage() {
+        return TextUtils.isEmpty(uri.get());
+    }
+
+    public boolean isNoTitle() {
+        return TextUtils.isEmpty(title.get());
+    }
+
+    public String getTitle() {
+        return title.get();
+    }
+
+    public String getImage() {
+        return uri.get();
+    }
+
+    public void setTitle(String title) {
+        this.title.set(title);
+    }
+
+    public void setImage(String uri) {
+        this.uri.set(uri);
     }
 }

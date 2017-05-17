@@ -62,4 +62,8 @@
         <item name="android:fitsSystemWindows">true</item>
         <item name="android:background">@drawable/alpha_black_gradient</item>
     </style>
+
+    <style name="DefaultText">
+        <item name="android:textSize">17sp</item>
+    </style>
 </resources>
