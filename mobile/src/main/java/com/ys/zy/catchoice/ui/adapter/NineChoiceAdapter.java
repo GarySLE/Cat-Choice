@@ -12,6 +12,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.ys.zy.catchoice.R;
 import com.ys.zy.catchoice.databinding.DataBindingAdapter;
 import com.ys.zy.catchoice.databinding.NineChoiceBinding;
+import com.ys.zy.catchoice.listener.CellClickListener;
+import com.ys.zy.catchoice.listener.OnCellClickListener;
 import com.ys.zy.catchoice.model.Choice;
 import com.ys.zy.catchoice.utils.GlideUtil;
 
@@ -23,13 +25,15 @@ import java.util.Collection;
  * Nine Choice Adapter
  */
 
-public class NineChoiceAdapter extends RecyclerView.Adapter<NineChoiceAdapter.NineChoiceViewHolder> {
+public class NineChoiceAdapter extends RecyclerView.Adapter<NineChoiceAdapter.NineChoiceViewHolder> implements OnCellClickListener {
 
     @NonNull
     private Context mCtx;
     private LayoutInflater mInflater;
     @NonNull
     private ArrayList<Choice> mList;
+
+    private OnCellClickListener mOnCellClickListener;
 
     public NineChoiceAdapter(@NonNull Context mCtx) {
         this.mCtx = mCtx;
@@ -67,6 +71,8 @@ public class NineChoiceAdapter extends RecyclerView.Adapter<NineChoiceAdapter.Ni
         } else {
             holder.mBinding.title.setTextColor(mCtx.getResources().getColor(R.color.white));
         }
+        holder.itemView.setOnClickListener(
+                new CellClickListener(holder.itemView, position, this));
     }
 
     @Override
@@ -106,6 +112,19 @@ public class NineChoiceAdapter extends RecyclerView.Adapter<NineChoiceAdapter.Ni
 
     public void remove(Choice choice) {
         mList.remove(choice);
+    }
+
+    public void setOnCellClickListener(OnCellClickListener onCellClickListener) {
+        this.mOnCellClickListener = onCellClickListener;
+    }
+
+    @Override
+    public void onCellClick(View view, int position) {
+        if (mOnCellClickListener != null) {
+            mOnCellClickListener.onCellClick(view, position);
+        } else {
+            // TODO: 17/5/18 choice selected animator
+        }
     }
 
     class NineChoiceViewHolder extends DataBindingAdapter.ObservableViewHolder<NineChoiceBinding> {

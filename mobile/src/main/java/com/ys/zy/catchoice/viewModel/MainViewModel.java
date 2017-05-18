@@ -31,6 +31,7 @@ import com.ys.zy.catchoice.databinding.ActivityMainBinding;
 import com.ys.zy.catchoice.db.GGColumns;
 import com.ys.zy.catchoice.db.SQLiteOperator;
 import com.ys.zy.catchoice.listener.OnCellClickListener;
+import com.ys.zy.catchoice.model.Choice;
 import com.ys.zy.catchoice.multiple.CellTouchCallback;
 import com.ys.zy.catchoice.multiple.MultiCell;
 import com.ys.zy.catchoice.multiple.MultiCellAdapter;
@@ -39,6 +40,7 @@ import com.ys.zy.catchoice.multiple.MultiplePool;
 import com.ys.zy.catchoice.provider.ImageCellProvider;
 import com.ys.zy.catchoice.provider.TextAndImageCellProvider;
 import com.ys.zy.catchoice.provider.TextCellProvider;
+import com.ys.zy.catchoice.ui.activity.ChoiceActivity;
 import com.ys.zy.catchoice.ui.activity.OptionActivity;
 import com.ys.zy.catchoice.ui.dialog.MaterialDialog;
 import com.ys.zy.catchoice.ui.widget.BlankItemDecoration;
@@ -49,7 +51,9 @@ import com.ys.zy.catchoice.utils.IntentUtil;
 import com.ys.zy.catchoice.utils.NumberUtil;
 import com.ys.zy.catchoice.utils.PhotoUtil;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Ys on 16/12/30.
@@ -112,6 +116,27 @@ public class MainViewModel extends ListViewModel implements OnCellClickListener 
         closeEditable();
 
         // TODO: 17/5/18 go to choice activity
+        ArrayList<MultiCell> cells = (ArrayList<MultiCell>) mAdapter.getCells().clone();
+        ArrayList<Choice> nineChoices = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            Random random = new Random();
+            int count = cells.size();
+            int index;
+            if (count == 1) {
+                index = 0;
+            } else {
+                index = random.nextInt(count);
+            }
+            MultiCell cell = cells.get(index);
+            String title = cell.mContent.getStringData(DataFlags.FLAG_TITLE);
+            String image = cell.mContent.getStringData(DataFlags.FLAG_IMAGE);
+            nineChoices.add(new Choice(title, image));
+            if (count >= 9) {
+                cells.remove(index);
+            }
+        }
+        startActivity(new Intent(mActivity, ChoiceActivity.class)
+                .putParcelableArrayListExtra(ChoiceViewModel.KEY_CHOICE_LIST, nineChoices));
 
 //        List<MultiCell> cells = mAdapter.getCells();
 //        if (cells.isEmpty()) return;

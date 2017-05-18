@@ -5,7 +5,7 @@ import android.view.View;
 
 /**
  * Created by Ys on 17/3/9.
- * MultiCell Click Listener in Adapter
+ * Click Listener in Adapter
  */
 
 public class CellClickListener implements View.OnClickListener {
