@@ -1,5 +1,8 @@
 package com.ys.zy.catchoice.ui.widget;
 
+import android.animation.Animator;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
@@ -9,8 +12,10 @@ import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AnimationSet;
 
 import com.ys.zy.catchoice.R;
+import com.ys.zy.catchoice.utils.DensityUtil;
 
 /**
  * Created by Ys on 17/4/26.
@@ -19,6 +24,7 @@ import com.ys.zy.catchoice.R;
 
 public class SwitchCardView extends CardView {
 
+    public static final int EVENT_TYPE_NONE = -1;
     public static final int EVENT_TYPE_CLICK = 0;
     public static final int EVENT_TYPE_TOUCH = 1;
 
@@ -37,6 +43,11 @@ public class SwitchCardView extends CardView {
     private int mSwitchEventType;
     private int mEventClickViewId;
     private int mEventBackViewId;
+    private boolean isCoverFront;
+
+    private boolean isRotationY;
+    private AnimatorSet mSwitchOutAnimator;
+    private AnimatorSet mSwitchInAnimator;
 
     private OnViewSwitchListener mViewSwitchListener;
     private OnSwitchTouchListener mSwitchTouchListener;
@@ -60,7 +71,7 @@ public class SwitchCardView extends CardView {
         final TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SwitchCardView,
                 defStyleAttr, R.style.Card);
 
-        mSwitchEventType = a.getInt(R.styleable.SwitchCardView_eventType, EVENT_TYPE_CLICK);
+        mSwitchEventType = a.getInt(R.styleable.SwitchCardView_eventType, EVENT_TYPE_NONE);
         mEventClickViewId = a.getResourceId(R.styleable.SwitchCardView_eventClickViewId, 0);
         mEventBackViewId = a.getResourceId(R.styleable.SwitchCardView_eventBackViewId, 0);
 
@@ -85,10 +96,13 @@ public class SwitchCardView extends CardView {
             case EVENT_TYPE_TOUCH:
                 // TODO: 17/4/26 more preset gesture
                 break;
+            default:
+                break;
         }
-        mRealView.setVisibility(GONE);
+        mRealView.setVisibility(INVISIBLE);
         mCoverView.setVisibility(VISIBLE);
         mCoverView.bringToFront();
+        isCoverFront = true;
     }
 
     private void initRealBackClick() {
@@ -117,12 +131,29 @@ public class SwitchCardView extends CardView {
         }
     }
 
+    public View getCoverView() {
+        return mCoverView;
+    }
+
+    public View getRealView() {
+        return mRealView;
+    }
+
+    public void setRotationY(boolean rotationY) {
+        this.isRotationY = rotationY;
+    }
+
     public void setViewSwitchListener(OnViewSwitchListener viewSwitchListener) {
         this.mViewSwitchListener = viewSwitchListener;
     }
 
     public void setSwitchTouchListener(OnSwitchTouchListener switchTouchListener) {
         this.mSwitchTouchListener = switchTouchListener;
+    }
+
+    public void setSwitchAnimator(AnimatorSet outAnimator, AnimatorSet inAnimator) {
+        this.mSwitchOutAnimator = outAnimator;
+        this.mSwitchInAnimator = inAnimator;
     }
 
     @Override
@@ -134,13 +165,44 @@ public class SwitchCardView extends CardView {
         return flag;
     }
 
+    public void switchCard() {
+        if (isCoverFront) {
+            mCoverView.setVisibility(INVISIBLE);
+            mRealView.setVisibility(VISIBLE);
+            mRealView.bringToFront();
+            isCoverFront = false;
+        } else {
+            mRealView.setVisibility(INVISIBLE);
+            mCoverView.setVisibility(VISIBLE);
+            mCoverView.bringToFront();
+            isCoverFront = true;
+        }
+    }
+
+    public void startAnimSwitch() {
+        if (mSwitchOutAnimator == null && mSwitchInAnimator == null) {
+            switchCard();
+            return;
+        }
+        if (isRotationY) {
+            int distance = 16000;
+            float scale = getResources().getDisplayMetrics().density * distance;
+            mCoverView.setCameraDistance(scale);
+            mRealView.setCameraDistance(scale);
+        }
+        mCoverView.setVisibility(VISIBLE);
+        mRealView.setVisibility(VISIBLE);
+        mSwitchOutAnimator.setTarget(isCoverFront ? mCoverView : mRealView);
+        mSwitchInAnimator.setTarget(isCoverFront ? mRealView : mCoverView);
+        mSwitchOutAnimator.start();
+        mSwitchInAnimator.start();
+    }
+
     private class EventClickListener implements OnClickListener {
 
         @Override
         public void onClick(View v) {
-            mCoverView.setVisibility(GONE);
-            mRealView.setVisibility(VISIBLE);
-            mRealView.bringToFront();
+            switchCard();
 
             if (mViewSwitchListener != null) {
                 mViewSwitchListener.onViewSwitch(false, mCoverView, mRealView);
@@ -152,9 +214,7 @@ public class SwitchCardView extends CardView {
 
         @Override
         public void onClick(View v) {
-            mRealView.setVisibility(GONE);
-            mCoverView.setVisibility(VISIBLE);
-            mCoverView.bringToFront();
+            switchCard();
 
             if (mViewSwitchListener != null) {
                 mViewSwitchListener.onViewSwitch(true, mCoverView, mRealView);

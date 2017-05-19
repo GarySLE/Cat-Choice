@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:minHeight="60dp"
-            android:text="@{content.text}"
+            android:text="@{content.txt}"
             tools:text="Title Text" />
 
         <ImageView

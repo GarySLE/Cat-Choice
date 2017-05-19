@@ -24,18 +24,18 @@ public class GGApp extends Application {
 
     private GGDBHelper mDBHelper;
 
-    private static GGApp instance;
+    private static GGApp sInstance;
 
     public static GGApp getApp() {
-        return instance;
+        return sInstance;
     }
 
     @Override
     public void onCreate() {
         Log.d("gg_app", "onCreate~");
         super.onCreate();
-        if (instance == null) {
-            instance = this;
+        if (sInstance == null) {
+            sInstance = this;
         }
 
         try {

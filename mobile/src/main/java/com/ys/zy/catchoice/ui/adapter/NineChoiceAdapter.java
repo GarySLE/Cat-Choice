@@ -61,12 +61,12 @@ public class NineChoiceAdapter extends RecyclerView.Adapter<NineChoiceAdapter.Ni
         if (!choice.isNoImage()) {
             holder.mBinding.title.setTextColor(mCtx.getResources().getColor(R.color.blackTxtPrimary));
             GlideUtil.with(mCtx)
-                    .load(choice)
+                    .load(choice.getImage())
                     .asBitmap()
                     .diskCacheStrategy(DiskCacheStrategy.RESULT)
                     .centerCrop()
                     .thumbnail(0.1f)
-                    .placeholder(R.color.whiteFlower)
+                    .placeholder(R.drawable.bg_circle_peach)
                     .into(holder.mBinding.image);
         } else {
             holder.mBinding.title.setTextColor(mCtx.getResources().getColor(R.color.white));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -15,35 +16,34 @@
 
     <com.ys.zy.catchoice.ui.widget.SwitchCardView
         android:id="@+id/choice_switcher"
-        android:layout_width="77dp"
-        android:layout_height="77dp"
-        app:cardCornerRadius="39dp">
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="50dp">
 
-        <android.support.v7.widget.CardView
+        <FrameLayout
             android:id="@+id/card_choice"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardCornerRadius="39dp">
+            android:layout_width="100dp"
+            android:layout_height="100dp">
 
             <ImageView
                 android:id="@+id/image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="@{content.noImage ? View.GONE : View.VISIBLE}" />
+                android:src="@drawable/bg_circle_peach" />
 
             <TextView
                 android:id="@+id/title"
-                style="@style/DefaultText"
+                style="@style/LargeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:maxWidth="50dp"
+                android:maxWidth="100dp"
                 android:text="@{content.title}"
                 android:visibility="@{content.noTitle ? View.GONE : View.VISIBLE}" />
 
-        </android.support.v7.widget.CardView>
+        </FrameLayout>
 
         <ImageView
             android:id="@+id/bg_choice"

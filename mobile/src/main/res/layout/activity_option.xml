@@ -81,11 +81,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/card_margin"
-                    android:clickable="true"
                     android:foreground="?android:attr/selectableItemBackground"
                     app:cardBackgroundColor="@color/whiteSnow"
                     app:cardCornerRadius="5dp"
-                    app:cardElevation="@dimen/default_elevation">
+                    app:cardElevation="@dimen/default_elevation"
+                    app:eventType="click">
 
                     <EditText
                         android:id="@+id/edit_title"
@@ -94,7 +94,7 @@
                         android:gravity="center"
                         android:hint="@string/hint_add"
                         android:minHeight="60dp"
-                        android:text="@{viewModel.getStringContent(DataFlag.FLAG_TITLE)}"
+                        android:text="@{viewModel.getStringContent(DataFlags.FLAG_TITLE)}"
                         android:textSize="17sp"
                         tools:visibility="gone" />
 
@@ -104,7 +104,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:minHeight="60dp"
-                        android:text="@{viewModel.getStringContent(DataFlag.FLAG_TITLE)}"
+                        android:text="@{viewModel.getStringContent(DataFlags.FLAG_TITLE)}"
                         android:textSize="17sp"
                         tools:text="Title Text" />
                 </com.ys.zy.catchoice.ui.widget.SwitchCardView>

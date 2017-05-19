@@ -37,7 +37,7 @@
             android:background="@color/alpha_white"
             android:gravity="center"
             android:minHeight="60dp"
-            android:text="@{content.text}"
+            android:text="@{content.txt}"
             tools:text="Title Text" />
 
         <ImageView

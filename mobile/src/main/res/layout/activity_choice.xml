@@ -12,16 +12,18 @@
             type="ChoiceViewModel" />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <FrameLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.ys.zy.catchoice.ui.activity.ChoiceActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
+            android:layout_gravity="center"
             app:layoutManager="@{viewModel.manager}" />
 
-    </android.support.constraint.ConstraintLayout>
+    </FrameLayout>
 </layout>

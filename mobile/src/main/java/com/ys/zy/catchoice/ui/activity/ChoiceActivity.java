@@ -24,5 +24,6 @@ public class ChoiceActivity extends AppCompatActivity {
         ActivityChoiceBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_choice);
         mViewModel = new ChoiceViewModel(this, new GridLayoutManager(this, 3), binding);
         mViewModel.handleIntent(getIntent());
+        binding.setViewModel(mViewModel);
     }
 }
